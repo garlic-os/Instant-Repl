@@ -1,6 +1,6 @@
 {
   "name": "instant-repl",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Spawn a repl anywhere in your code. As long as your code is async.",
   "main": "app.js",
   "dependencies": {

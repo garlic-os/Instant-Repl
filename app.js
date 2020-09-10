@@ -1,17 +1,13 @@
 const readline = require("readline");
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
-
 
 /**
- * Python's input() but it returns a promise.
+ * Promise wrapper for readline.Interface.question.
  * 
+ * @param {readline.Interface} rl - readline instance
  * @param {string} prompt - print this to the console 
  * @return {Promise<string>} user's input
  */
-const input = (prompt) => {
+const input = (rl, prompt) => {
     return new Promise( (resolve) => {
         rl.question(prompt, resolve);
     });
@@ -19,13 +15,19 @@ const input = (prompt) => {
 
 
 const instantRepl = async () => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
     // Loop until a ".exit" command
     while (true) {
         // Wait for input
-        const command = await input(">>> ");
+        const command = await input(rl, ">>> ");
         
         if (command === ".exit") {
             // Quit the repl
+            rl.close();
             break;
         }
 
