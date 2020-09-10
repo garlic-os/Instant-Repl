@@ -5,30 +5,36 @@ const rl = readline.createInterface({
 });
 
 
+/**
+ * Python's input() but it returns a promise.
+ * 
+ * @param {string} prompt - print this to the console 
+ * @return {Promise<string>} user's input
+ */
 const input = (prompt) => {
-    return new Promise( (resolve, reject) => {
-        rl.question(prompt, (command) => {
-            if (command === ".exit") {
-                reject();
-            } else {
-                resolve(command);
-            }
-        });
+    return new Promise( (resolve) => {
+        rl.question(prompt, resolve);
     });
 };
 
 
 const instantRepl = async () => {
+    // Loop until a ".exit" command
     while (true) {
-        try {
-            const command = await input(">>> ");
-            try {
-                console.log(eval(command));
-            } catch (err) {
-                console.error(err);
-            }
-        } catch (e) {
+        // Wait for input
+        const command = await input(">>> ");
+        
+        if (command === ".exit") {
+            // Quit the repl
             break;
+        }
+
+        try {
+            // eval() the input
+            console.log(eval(command));
+        } catch (err) {
+            // print eval() errors to console instead of crashing
+            console.error(err);
         }
     }
 };
