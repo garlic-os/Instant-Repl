@@ -11,8 +11,19 @@ npm install --save-dev instant-repl
 const instantRepl = require("instant-repl");
 
 (async () => {
+    let coolVariable = 65535;
     console.log("Stuff before spawning a repl");
     await instantRepl();
     console.log("Stuff after spawning a repl");
 })();
+```
+
+```
+Stuff before spawning a repl
+>>> 2 + 2
+4
+>>> coolVariable
+65535
+>>> .exit
+Stuff after spawning a repl
 ```
