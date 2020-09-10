@@ -18,7 +18,7 @@ const instantRepl = require("instant-repl");
 })();
 ```
 
-```
+```js
 Stuff before spawning a repl
 >>> 2 + 2
 4
